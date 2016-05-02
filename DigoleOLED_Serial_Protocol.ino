@@ -17,7 +17,7 @@ void resetpos(void) //for demo use, reset display position and clean the demo li
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   mydisp.begin();
   mydisp.clearScreen();
 }
@@ -27,17 +27,23 @@ void loop()
   if(Serial.available())
   {
     int i = 0;
+    String s = "";
+    
     mydisp.clearScreen();
     while(Serial.available())
     {
       char c = Serial.read();
+      
       if(c == '\\')
       {
+        mydisp.print(s);
+        s = "";
         mydisp.setPrintPos(0, ++i);
         continue;
       }
-      mydisp.print(c);
+      s = s + c;
     }
+    mydisp.print(s);
   }
 }
 /*void setup() {
