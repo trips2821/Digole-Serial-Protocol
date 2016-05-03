@@ -44,6 +44,7 @@ void loop()
       s = s + c;
     }
     mydisp.print(s);
+    Serial.write("OK");
   }
 }
 /*void setup() {
